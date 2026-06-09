@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Viewer</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Highlight.js CSS for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Markdown Viewer</h1>
+    </header>
+    <main class="container">
+        <section class="pane editor-pane">
+            <textarea id="editor" placeholder="Markdownを入力またはペーストしてください..."># Welcome to Markdown Viewer
+
+This is a **lightweight**, *beautiful* Markdown viewer built with plain HTML, CSS, and JS.
+
+## Features
+- 🚀 **Fast**: Uses CDN libraries, no build step.
+- 🌙 **Dark Mode**: Sleek aesthetic by default.
+- 💻 **Syntax Highlighting**:
+  ```javascript
+  function greet() {
+      console.log("Hello, world!");
+  }
+  ```
+- 🔗 [Links](https://example.com) and images are supported!
+
+### Markdown Table
+| Feature | Supported |
+|---|---|
+| Tables | Yes |
+| Lists | Yes |
+
+Enjoy writing!</textarea>
+        </section>
+        <section class="pane preview-pane" id="preview">
+            <!-- Rendered Markdown will appear here -->
+        </section>
+    </main>
+
+    <!-- marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- DOMPurify -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.9/purify.min.js"></script>
+    
+    <!-- Highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+</html>

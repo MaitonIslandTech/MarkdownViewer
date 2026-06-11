@@ -53,16 +53,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // PDF Export functionality
     const exportPdfBtn = document.getElementById('export-pdf');
     exportPdfBtn.addEventListener('click', () => {
-        const opt = {
-            margin:       10,
-            filename:     'document.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#1e1e1e' },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
+        try {
+            exportPdfBtn.innerText = '生成中...';
+            exportPdfBtn.disabled = true;
 
-        // Temporarily adjust styles for better PDF output if needed
-        // but default html2canvas usually handles the displayed element well.
-        html2pdf().set(opt).from(preview).save();
+            const opt = {
+                margin:       10,
+                filename:     'document.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#1e1e1e', scrollY: 0 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // スクロールバーの影響をなくすため、PDF用のクローン要素を作成
+            const element = document.createElement('div');
+            element.innerHTML = preview.innerHTML;
+            element.className = 'preview-pane';
+            element.style.position = 'absolute';
+            element.style.left = '-9999px';
+            element.style.width = '800px';
+            element.style.height = 'auto';
+            element.style.overflow = 'visible';
+            document.body.appendChild(element);
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                document.body.removeChild(element);
+                exportPdfBtn.innerText = 'Export PDF';
+                exportPdfBtn.disabled = false;
+            }).catch(err => {
+                console.error(err);
+                alert('PDFエラー: ' + err);
+                document.body.removeChild(element);
+                exportPdfBtn.innerText = 'Export PDF';
+                exportPdfBtn.disabled = false;
+            });
+        } catch (e) {
+            alert('PDFライブラリのエラー: ' + e);
+            exportPdfBtn.innerText = 'Export PDF';
+            exportPdfBtn.disabled = false;
+        }
     });
 });

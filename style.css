@@ -204,3 +204,46 @@ body {
 #preview table tr:nth-child(2n) {
     background-color: rgba(255, 255, 255, 0.02);
 }
+
+/* Print Styles for PDF Export */
+@media print {
+    body {
+        background-color: white;
+        color: black;
+        display: block;
+        height: auto;
+        overflow: visible;
+    }
+    .header, .editor-pane {
+        display: none !important;
+    }
+    .container {
+        display: block;
+        height: auto;
+        overflow: visible;
+    }
+    .preview-pane {
+        background-color: white;
+        color: black;
+        padding: 0;
+        width: 100%;
+        overflow: visible;
+    }
+    /* Change text color to black for printing */
+    #preview, #preview h1, #preview h2, #preview h3, #preview h4, #preview h5, #preview h6 {
+        color: black !important;
+        border-color: #ccc !important;
+    }
+    #preview pre {
+        background-color: #f5f5f5 !important;
+        color: black !important;
+        border: 1px solid #ddd;
+    }
+    #preview code {
+        background-color: #f5f5f5 !important;
+        color: black !important;
+    }
+    #preview table th, #preview table td {
+        border-color: #ccc !important;
+    }
+}

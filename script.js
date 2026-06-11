@@ -49,4 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         isScrollingEditor = false;
     });
+
+    // PDF Export functionality
+    const exportPdfBtn = document.getElementById('export-pdf');
+    exportPdfBtn.addEventListener('click', () => {
+        const opt = {
+            margin:       10,
+            filename:     'document.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#1e1e1e' },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Temporarily adjust styles for better PDF output if needed
+        // but default html2canvas usually handles the displayed element well.
+        html2pdf().set(opt).from(preview).save();
+    });
 });
